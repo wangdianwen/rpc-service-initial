@@ -1,0 +1,117 @@
+run:
+  timeout: 10m
+  go: "1.22"
+  issues:
+    max-issues-per-linter: 100
+    max-same-issues: 10
+    new: false
+    exclude-rules:
+      - path: _test\.go
+        linters:
+          - dupl
+          - funlen
+          - testpackage
+          - paralleltest
+      - path: \.pb\.go
+        linters:
+          - goimports
+          - golint
+      - path: mocks?/
+        linters:
+          - gochecknoglobals
+          - gochecknoinits
+      - path: cmd/
+        linters:
+          - errcheck
+      - linters:
+          - depguard
+      - linters:
+          - unparam
+      - linters:
+          - nestif
+
+output:
+  formats:
+    - format: colored-line-number
+      path: stdout
+  print-issued-lines: true
+  print-linter-name: true
+
+linters:
+  enable-all: true
+  disable:
+    - gochecknoglobals
+    - gochecknoinits
+    - wsl
+    - funlen
+    - cyclop
+    - nlreturn
+    - wrapcheck
+    - err113
+    - exhaustive
+    - varnamelen
+    - gocognit
+    - godox
+    - depguard
+    - exhaustruct
+    - lll
+    - mnd
+    - paralleltest
+    - testpackage
+    - revive
+    - tagliatelle
+    - govet
+    - gofumpt
+    - unparam
+    - nestif
+    - tenv
+
+linters-settings:
+  goimports:
+    tab-width: 4
+    space: true
+
+  gocyclo:
+    min-complexity: 15
+    max-complexity: 30
+
+  godot:
+    scope: all
+
+  dupl:
+    threshold: 100
+
+  misspell:
+    locale: US
+    ignore-words:
+      - foobar
+      - parm
+      - locat
+
+  unused:
+    check-exported: true
+
+  staticcheck:
+    checks: ["all"]
+
+  errcheck:
+    check-type-assertions: true
+    check-blank: true
+
+  bodyclose:
+    check-response: true
+
+  gci:
+    sections:
+      - standard
+      - prefix(rpc-service)
+      - default
+
+  gomodguard:
+    blocked-modules:
+      - module: io/ioutil
+        replacement: "io and os packages"
+        hint: "io/ioutil is deprecated in Go 1.16"
+    allowed-modules:
+      - "google.golang.org/*"
+      - "github.com/*"

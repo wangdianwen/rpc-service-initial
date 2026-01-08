@@ -1,5 +1,5 @@
 {
-  "name": "Go RPC Service",
+  "name": "Go RPC Service DDD",
   "image": "golang:latest",
   "features": {
     "ghcr.io/devcontainers/features/go:1": {
@@ -10,16 +10,91 @@
   "customizations": {
     "vscode": {
       "extensions": [
-        "ms-vscode.go",
         "golang.go",
-        "dbaeumer.vscode-eslint",
+       "raidolid.golangci-lint",
+        "github.vscode-github-actions",
+        "editorconfig.editorconfig",
+        "eamodio.gitlens",
+        "streetsidesoftware.code-spell-checker",
+        "ms-azuretools.vscode-containers",
+        "sst-dev.opencode",
         "esbenp.prettier-vscode",
-        "formulahendry.docker-extension",
-        "anomaly.opencode"
-      ]
+        "dbaeumer.vscode-eslint"
+      ],
+      "settings": {
+        "go.useLanguageServer": true,
+        "go.languageServerExperimentalFeatures": {
+          "diagnostics": true,
+          "documentLink": true,
+          "go to typeDefinition": true,
+          "inlayHints": true,
+          "semanticTokens": true
+        },
+        "go.formatTool": "goimports",
+        "go.defaultFormatter": "golang.go",
+        "[go]": {
+          "editor.defaultFormatter": "golang.go",
+          "editor.formatOnSave": true,
+          "editor.codeActionsOnSave": {
+            "source.organizeImports": "explicit",
+            "source.fixAll": "explicit"
+          },
+          "editor.tabSize": 4,
+          "editor.insertSpaces": true
+        },
+        "go.lintTool": "golangci-lint",
+        "go.lintOnSave": "file",
+        "go.lintFlags": [
+          "--fast",
+          "--issues-exit-code=1",
+          "--output-format=colored-line-number"
+        ],
+        "go.testFlags": [
+          "-v",
+          "-race",
+          "-cover",
+          "-count=1"
+        ],
+        "go.coverageOptions": "showCoveredCodeOnly",
+        "go.testTimeout": "300s",
+        "go.buildTags": "ddd",
+        "go.vetOnSave": "package",
+        "go.diagnosticFlags": {
+          "vulncheck": "Imports"
+        },
+        "go.completion.snippetSupport": true,
+        "go.completion.enableWorkspaceSymbols": true,
+        "editor.rulers": [
+          80,
+          120
+        ],
+        "editor.renderLineHighlight": "all",
+        "editor.bracketPairColorization.enabled": true,
+        "files.trimTrailingWhitespace": true,
+        "files.insertFinalNewline": true,
+        "files.eol": "\n",
+        "files.associations": {
+          "*.proto": "protobuf",
+          "*.yaml": "yaml",
+          "*.yml": "yaml"
+        },
+        "search.exclude": {
+          "**/bin": true,
+          "**/vendor": true,
+          "**/*_test.go": true,
+          "**/mocks": true,
+          "**/*.pb.go": true
+        },
+        "files.watcherExclude": {
+          "**/.git/objects/**": true,
+          "**/bin/**": true,
+          "**/vendor/**": true
+        }
+      }
     }
   },
   "postCreateCommand": "bash .devcontainer/install.sh",
   "workspaceFolder": "/workspace",
-  "workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind"
+  "workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind",
+  "remoteUser": "root"
 }

@@ -1,0 +1,58 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "RPC Service Debug",
+      "type": "go",
+      "request": "launch",
+      "mode": "auto",
+      "program": "${workspaceFolder}/cmd/rpc-service/main.go",
+      "env": {},
+      "args": [],
+      "showLog": true,
+      "trace": "log",
+      "logOutput": "debugger,gdb-wire,lldb,dbg-dap",
+      "substitutePath": []
+    },
+    {
+      "name": "RPC Service Debug with Args",
+      "type": "go",
+      "request": "launch",
+      "mode": "auto",
+      "program": "${workspaceFolder}/cmd/rpc-service/main.go",
+      "env": {
+        "DEBUG": "true"
+      },
+      "args": [
+        "--port",
+        "1234",
+        "--config",
+        "config.yaml"
+      ],
+      "showLog": true,
+      "trace": "verbose",
+      "logOutput": "debugger,gdb-wire,lldb,dbg-dap"
+    },
+    {
+      "name": "Attach to Process",
+      "type": "go",
+      "request": "attach",
+      "mode": "local",
+      "processId": "${command:PickProcess}"
+    },
+    {
+      "name": "Test Package",
+      "type": "go",
+      "request": "launch",
+      "mode": "test",
+      "program": "${workspaceFolder}",
+      "args": [
+        "./..."
+      ],
+      "env": {
+        "GOCOVERDIR": "${workspaceFolder}/coverage"
+      },
+      "showLog": true
+    }
+  ]
+}

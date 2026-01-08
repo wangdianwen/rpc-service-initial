@@ -1,0 +1,27 @@
+# Git attributes
+
+# Set default behavior to automatically normalize line endings
+* text=auto eol=lf
+
+# Ensure binary files are not normalized
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.pdf binary
+*.zip binary
+*.gz binary
+*.tar binary
+
+# Protocol buffer files should use LF
+*.proto text eol=lf
+
+# Go source files should use LF
+*.go text eol=lf
+
+# Makefiles should use LF
+Makefile text eol=lf
+
+# Shell scripts should use LF
+*.sh text eol=lf

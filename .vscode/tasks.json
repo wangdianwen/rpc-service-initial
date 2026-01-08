@@ -1,0 +1,96 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Go: Build",
+      "type": "shell",
+      "command": "go build -o bin/rpc-service ./cmd/rpc-service",
+      "group": "build",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared"
+      }
+    },
+    {
+      "label": "Go: Test",
+      "type": "shell",
+      "command": "go test -v -race -cover -count=1 ./...",
+      "group": "test",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared"
+      }
+    },
+    {
+      "label": "Go: Test with Coverage",
+      "type": "shell",
+      "command": "go test -race -coverprofile=coverage.out ./... && go tool cover -html=coverage.out -o coverage.html",
+      "group": "test",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared"
+      }
+    },
+    {
+      "label": "Go: Lint",
+      "type": "shell",
+      "command": "golangci-lint run ./...",
+      "group": "build",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared"
+      }
+    },
+    {
+      "label": "Go: Format",
+      "type": "shell",
+      "command": "gofumpt -l -w . && goimports -l -w .",
+      "group": "build",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared"
+      }
+    },
+    {
+      "label": "Go: Generate Mocks",
+      "type": "shell",
+      "command": "go generate ./...",
+      "group": "build",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared"
+      }
+    },
+    {
+      "label": "Go: Proto",
+      "type": "shell",
+      "command": "make proto",
+      "group": "build",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared"
+      }
+    },
+    {
+      "label": "Go: Clean",
+      "type": "shell",
+      "command": "make clean",
+      "group": "build",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared"
+      }
+    },
+    {
+      "label": "Go: Run",
+      "type": "shell",
+      "command": "./bin/rpc-service",
+      "group": "run",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared"
+      },
+      "isBackground": true
+    }
+  ]
+}

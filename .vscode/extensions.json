@@ -1,0 +1,14 @@
+{
+  "recommendations": [
+    "golang.go",
+    "mvdan.go",
+    "raidolid.golangci-lint",
+    "sonarsource.sonarlint-vscode",
+    " Vineetric.code-glSP-go",
+    "esbenp.prettier-vscode",
+    "dbaeumer.vscode-eslint",
+    "editorconfig.editorconfig",
+    "streetsidesoftware.code-spell-checker",
+    "mutantdino.resourcemonitor"
+  ]
+}
