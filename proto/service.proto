@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package rpcservice;
+
+option go_package = "rpc-service/pb";
+
+service RpcService {
+    rpc GetData (Request) returns (Response);
+    rpc SendData (Request) returns (Response);
+}
+
+message Request {
+    string name = 1;
+    string data = 2;
+}
+
+message Response {
+    bool success = 1;
+    string message = 2;
+    string result = 3;
+}

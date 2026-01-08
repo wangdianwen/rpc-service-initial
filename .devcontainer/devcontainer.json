@@ -1,0 +1,25 @@
+{
+  "name": "Go RPC Service",
+  "image": "golang:latest",
+  "features": {
+    "ghcr.io/devcontainers/features/go:1": {
+      "version": "latest",
+      "goVersion": "latest"
+    }
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-vscode.go",
+        "golang.go",
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode",
+        "formulahendry.docker-extension",
+        "anomaly.opencode"
+      ]
+    }
+  },
+  "postCreateCommand": "bash .devcontainer/install.sh",
+  "workspaceFolder": "/workspace",
+  "workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind"
+}
