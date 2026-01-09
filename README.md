@@ -9,10 +9,58 @@ A Go-based RPC (Remote Procedure Call) service built with Domain-Driven Design (
 ## Features
 
 - RPC server with JSON-RPC support
+- gRPC weather service with current weather and forecast
 - Domain-Driven Design architecture
 - Dependency injection
 - Configuration management via environment variables
 - Structured logging
+
+## Weather gRPC Service
+
+The service exposes a gRPC endpoint for weather data:
+
+### Current Weather
+Get current weather conditions for a location:
+```protobuf
+rpc GetCurrentWeather (CurrentWeatherRequest) returns (CurrentWeatherResponse);
+```
+
+### Weather Forecast
+Get multi-day weather forecast:
+```protobuf
+rpc GetForecast (ForecastRequest) returns (ForecastResponse);
+```
+
+### Configuration
+
+Set environment variables for weather API:
+```bash
+export WEATHER_API_KEY=your_api_key
+export WEATHER_API_URL=https://api.openweathermap.org/data/2.5
+export WEATHER_TIMEOUT=10
+```
+
+### Example Usage (Go Client)
+
+```go
+conn, err := grpc.Dial("localhost:1235")
+if err != nil {
+    log.Fatal(err)
+}
+defer conn.Close()
+
+client := pb.NewWeatherServiceClient(conn)
+
+resp, err := client.GetCurrentWeather(ctx, &pb.CurrentWeatherRequest{
+    City: "London",
+})
+if err != nil {
+    log.Fatal(err)
+}
+
+fmt.Printf("Temperature: %.1f°C\n", resp.Data.Temperature)
+fmt.Printf("Condition: %s\n", resp.Data.Condition.Description)
+```
 
 ## Getting Started
 

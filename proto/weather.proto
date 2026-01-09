@@ -1,0 +1,88 @@
+syntax = "proto3";
+
+package weather;
+
+option go_package = "rpc-service/pb/weather";
+
+service WeatherService {
+    rpc GetCurrentWeather (CurrentWeatherRequest) returns (CurrentWeatherResponse);
+    rpc GetForecast (ForecastRequest) returns (ForecastResponse);
+}
+
+message Location {
+    string city = 1;
+    string country = 2;
+    double lat = 3;
+    double lon = 4;
+}
+
+message WeatherCondition {
+    int32 code = 1;
+    string main = 2;
+    string description = 3;
+    string icon = 4;
+}
+
+message CurrentWeather {
+    Location location = 1;
+    double temperature = 2;
+    double feels_like = 3;
+    int32 humidity = 4;
+    int32 pressure = 5;
+    double wind_speed = 6;
+    int32 wind_direction = 7;
+    int32 cloudiness = 8;
+    int32 visibility = 9;
+    WeatherCondition condition = 10;
+    string timestamp = 11;
+}
+
+message DailyForecast {
+    string date = 1;
+    double temp_min = 2;
+    double temp_max = 3;
+    double temp_morning = 4;
+    double temp_day = 5;
+    double temp_evening = 6;
+    double temp_night = 7;
+    int32 humidity = 8;
+    int32 pressure = 9;
+    double wind_speed = 10;
+    int32 wind_direction = 11;
+    int32 cloudiness = 12;
+    double precipitation = 13;
+    WeatherCondition condition = 14;
+    double pop = 15;
+}
+
+message Forecast {
+    Location location = 1;
+    CurrentWeather current = 2;
+    repeated DailyForecast forecasts = 3;
+    string generated_at = 4;
+}
+
+message CurrentWeatherRequest {
+    string city = 1;
+    double lat = 2;
+    double lon = 3;
+}
+
+message CurrentWeatherResponse {
+    bool success = 1;
+    CurrentWeather data = 2;
+    string error = 3;
+}
+
+message ForecastRequest {
+    string city = 1;
+    double lat = 2;
+    double lon = 3;
+    int32 days = 4;
+}
+
+message ForecastResponse {
+    bool success = 1;
+    Forecast data = 2;
+    string error = 3;
+}

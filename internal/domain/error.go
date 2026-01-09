@@ -10,6 +10,11 @@ var (
 	ErrInvalidServiceName  = errors.New("invalid service name")
 	ErrServiceNameTooLong  = errors.New("service name exceeds maximum length")
 	ErrConcurrencyConflict = errors.New("concurrency conflict detected")
+	ErrWeatherNotFound     = errors.New("weather data not found")
+	ErrInvalidLocation     = errors.New("invalid location")
+	ErrWeatherAPIError     = errors.New("weather API error")
+	ErrRateLimited         = errors.New("rate limited by weather API")
+	ErrAPITimeout          = errors.New("weather API timeout")
 )
 
 type DomainError struct {

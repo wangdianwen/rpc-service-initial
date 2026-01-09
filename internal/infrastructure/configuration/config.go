@@ -6,10 +6,13 @@ import (
 )
 
 type Config struct {
-	Port     int    `mapstructure:"port"`
-	Host     string `mapstructure:"host"`
-	Env      string `mapstructure:"env"`
-	LogLevel string `mapstructure:"log_level"`
+	Port           int    `mapstructure:"port"`
+	Host           string `mapstructure:"host"`
+	Env            string `mapstructure:"env"`
+	LogLevel       string `mapstructure:"log_level"`
+	WeatherAPIKey  string `mapstructure:"weather_api_key"`
+	WeatherAPIURL  string `mapstructure:"weather_api_url"`
+	WeatherTimeout int    `mapstructure:"weather_timeout"`
 }
 
 type ConfigProvider interface {
@@ -27,6 +30,9 @@ func (p *EnvConfigProvider) GetConfig() (*Config, error) {
 	host := "0.0.0.0"
 	env := "development"
 	logLevel := "info"
+	weatherAPIKey := ""
+	weatherAPIURL := ""
+	weatherTimeout := 10
 
 	if v := os.Getenv("PORT"); v != "" {
 		if _, err := fmt.Sscanf(v, "%d", &port); err != nil {
@@ -46,10 +52,27 @@ func (p *EnvConfigProvider) GetConfig() (*Config, error) {
 		logLevel = v
 	}
 
+	if v := os.Getenv("WEATHER_API_KEY"); v != "" {
+		weatherAPIKey = v
+	}
+
+	if v := os.Getenv("WEATHER_API_URL"); v != "" {
+		weatherAPIURL = v
+	}
+
+	if v := os.Getenv("WEATHER_TIMEOUT"); v != "" {
+		if _, err := fmt.Sscanf(v, "%d", &weatherTimeout); err != nil {
+			return nil, err
+		}
+	}
+
 	return &Config{
-		Port:     port,
-		Host:     host,
-		Env:      env,
-		LogLevel: logLevel,
+		Port:           port,
+		Host:           host,
+		Env:            env,
+		LogLevel:       logLevel,
+		WeatherAPIKey:  weatherAPIKey,
+		WeatherAPIURL:  weatherAPIURL,
+		WeatherTimeout: weatherTimeout,
 	}, nil
 }
