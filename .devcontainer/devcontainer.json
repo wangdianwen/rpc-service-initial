@@ -5,13 +5,17 @@
     "ghcr.io/devcontainers/features/go:1": {
       "version": "latest",
       "goVersion": "latest"
+    },
+    "ghcr.io/devcontainers/features/node:1": {
+      "version": "lts",
+      "nodeGyp": true
     }
   },
   "customizations": {
     "vscode": {
-      "extensions": [
+       "extensions": [
         "golang.go",
-       "raidolid.golangci-lint",
+        "raidolid.golangci-lint",
         "github.vscode-github-actions",
         "editorconfig.editorconfig",
         "eamodio.gitlens",
@@ -19,7 +23,8 @@
         "ms-azuretools.vscode-containers",
         "sst-dev.opencode",
         "esbenp.prettier-vscode",
-        "dbaeumer.vscode-eslint"
+        "dbaeumer.vscode-eslint",
+        "Fission-AI.openspec"
       ],
       "settings": {
         "go.useLanguageServer": true,

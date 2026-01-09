@@ -30,8 +30,13 @@ apt-get install -y --no-install-recommends zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
 echo 'exec zsh' >> ~/.bashrc
 
-echo "=== Installing additional tools ==="
+ echo "=== Installing additional tools ==="
 curl -fsSL https://opencode.ai/install | bash
 echo 'export PATH=/root/.opencode/bin:$PATH' >> ~/.zshrc
+
+echo "=== Installing OpenSpec ==="
+npm install -g @fission-ai/openspec
+export PATH="/root/.npm-global/bin:$PATH"
+echo 'export PATH="/root/.npm-global/bin:$PATH"' >> ~/.zshrc
 
 echo "=== Installation completed successfully! ==="
